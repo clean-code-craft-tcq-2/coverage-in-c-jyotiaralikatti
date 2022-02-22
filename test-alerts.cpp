@@ -18,23 +18,70 @@ TEST_CASE("Test case to Infer breach when limit is NORMAL") {
 //** Test cases for checkAndAlert() **//
 TEST_CASE("Test case to alert TO_CONTROLLER for cooling type HI_ACTIVE_COOLING") {
     BatteryCharacter batteryChar;
-    double temperatureInC = 50;
-    BreachType breachType;
+    batteryChar.brand = "xyz";
     batteryChar.coolingType = HI_ACTIVE_COOLING;
-    breachType = checkAndAlert(TO_CONTROLLER,batteryChar,temperatureInC);
   
   REQUIRE(inferBreach(50, 0,45) == TOO_HIGH);// to cross verify
-  REQUIRE(breachType == TOO_HIGH);
+  REQUIRE(checkAndAlert(TO_CONTROLLER,batteryChar,50) == TOO_HIGH);
+  REQUIRE(checkAndAlert(TO_CONTROLLER,batteryChar,-15) == TOO_LOW);
+  REQUIRE(checkAndAlert(TO_CONTROLLER,batteryChar,42) == NORMAL);
+}
+
+TEST_CASE("Test case to alert TO_CONTROLLER for cooling type MED_ACTIVE_COOLING") {
+    BatteryCharacter batteryChar;
+    batteryChar.brand = "xyz";
+    batteryChar.coolingType = MED_ACTIVE_COOLING;
+  
+  REQUIRE(inferBreach(-10, 0,40) == TOO_LOW);// to cross verify
+  REQUIRE(checkAndAlert(TO_CONTROLLER,batteryChar,50) == TOO_HIGH);
+  REQUIRE(checkAndAlert(TO_CONTROLLER,batteryChar,-10) == TOO_LOW);
+  REQUIRE(checkAndAlert(TO_CONTROLLER,batteryChar,35) == NORMAL);
+  
+}
+
+TEST_CASE("Test case to alert TO_CONTROLLER for cooling type PASSIVE_COOLING") {
+    BatteryCharacter batteryChar;
+    batteryChar.brand = "xyz";
+    batteryChar.coolingType = PASSIVE_COOLING;
+  
+  REQUIRE(inferBreach(-10, 0,30) == TOO_LOW);// to cross verify
+  REQUIRE(checkAndAlert(TO_CONTROLLER,batteryChar,40) == TOO_HIGH);
+  REQUIRE(checkAndAlert(TO_CONTROLLER,batteryChar,-10) == TOO_LOW);
+  REQUIRE(checkAndAlert(TO_CONTROLLER,batteryChar,15) == NORMAL);
+  
+}
+
+TEST_CASE("Test case to alert TO_EMAIL for cooling type HI_ACTIVE_COOLING") {
+    BatteryCharacter batteryChar;
+    batteryChar.brand = "xyz";
+    batteryChar.coolingType = HI_ACTIVE_COOLING;
+  
+  REQUIRE(inferBreach(50, 0,45) == TOO_HIGH);// to cross verify
+  REQUIRE(checkAndAlert(TO_EMAIL,batteryChar,50) == TOO_HIGH);
+  REQUIRE(checkAndAlert(TO_EMAIL,batteryChar,-15) == TOO_LOW);
+  REQUIRE(checkAndAlert(TO_EMAIL,batteryChar,42) == NORMAL);
 }
 
 TEST_CASE("Test case to alert TO_EMAIL for cooling type MED_ACTIVE_COOLING") {
     BatteryCharacter batteryChar;
-    double temperatureInC = -10;
-    BreachType breachType;
+    batteryChar.brand = "xyz";
     batteryChar.coolingType = MED_ACTIVE_COOLING;
-    breachType = checkAndAlert(TO_EMAIL,batteryChar,temperatureInC);
   
   REQUIRE(inferBreach(-10, 0,40) == TOO_LOW);// to cross verify
-  REQUIRE(breachType == TOO_LOW);
+  REQUIRE(checkAndAlert(TO_EMAIL,batteryChar,50) == TOO_HIGH);
+  REQUIRE(checkAndAlert(TO_EMAIL,batteryChar,-10) == TOO_LOW);
+  REQUIRE(checkAndAlert(TO_EMAIL,batteryChar,35) == NORMAL);
+  
+}
+
+TEST_CASE("Test case to alert TO_EMAIL for cooling type PASSIVE_COOLING") {
+    BatteryCharacter batteryChar;
+    batteryChar.brand = "xyz";
+    batteryChar.coolingType = PASSIVE_COOLING;
+  
+  REQUIRE(inferBreach(-10, 0,30) == TOO_LOW);// to cross verify
+  REQUIRE(checkAndAlert(TO_EMAIL,batteryChar,40) == TOO_HIGH);
+  REQUIRE(checkAndAlert(TO_EMAIL,batteryChar,-10) == TOO_LOW);
+  REQUIRE(checkAndAlert(TO_EMAIL,batteryChar,15) == NORMAL);
   
 }
