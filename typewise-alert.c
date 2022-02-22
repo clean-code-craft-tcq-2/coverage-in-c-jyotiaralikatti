@@ -1,5 +1,11 @@
 #include "typewise-alert.h"
 #include <stdio.h>
+CoolingTypeLimitsConfig LimitsConfig[] = {/* LimitsConfig[coolingType] */
+    /*lowerLimit                    upperLimit*/
+    {PASSIVECOOLING_LOWERLIMIT,    PASSIVECOOLING_UPPERLIMIT },
+    {HI_ACTIVECOOLING_LOWERLIMIT,  HI_ACTIVECOOLING_UPPERLIMIT},
+    {MED_ACTIVECOOLING_LOWERLIMIT, MED_ACTIVECOOLING_UPPERLIMIT}
+  };
 
 void (*alertTarget_FuncPtr[])(BreachType)={sendToController,sendToEmail};
 
