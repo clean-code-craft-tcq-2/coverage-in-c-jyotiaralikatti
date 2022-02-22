@@ -12,7 +12,7 @@ void (*alertTarget_FuncPtr[])(BreachType)={sendToController,sendToEmail};
 
 void checkAndAlert(AlertTarget alertTarget, BatteryCharacter batteryChar, double temperatureInC)
 {
-  BreachType breachType = classifyTemperatureBreach(batteryChar.coolingType, temperatureInC );
+  BreachType breachType = inferBreach( temperatureInC, batteryChar.coolingType );
 
 alertTarget_FuncPtr[alertTarget](breachType);
 }
