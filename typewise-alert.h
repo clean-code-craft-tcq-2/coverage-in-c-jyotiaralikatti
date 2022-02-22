@@ -37,7 +37,6 @@ typedef struct {
 } BatteryCharacter;
 
 BreachType inferBreach(double temperatureInC, CoolingType coolingType );
-BreachType classifyTemperatureBreach(CoolingType coolingType, double temperatureInC);
 CoolingTypeLimitsConfig GetLimitsOfCoolingType(CoolingType coolingType  );
 
 void checkAndAlert(
