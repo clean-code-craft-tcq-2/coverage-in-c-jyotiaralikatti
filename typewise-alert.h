@@ -40,14 +40,6 @@ BreachType inferBreach(double value, double lowerLimit, double upperLimit);
 BreachType classifyTemperatureBreach(CoolingType coolingType, double temperatureInC);
 CoolingTypeLimitsConfig GetLimitsOfCoolingType(CoolingType coolingType  );
 
-
-CoolingTypeLimitsConfig LimitsConfig[] = {/* LimitsConfig[coolingType] */
-    /*lowerLimit                    upperLimit*/
-    {PASSIVECOOLING_LOWERLIMIT,    PASSIVECOOLING_UPPERLIMIT },
-    {HI_ACTIVECOOLING_LOWERLIMIT,  HI_ACTIVECOOLING_UPPERLIMIT},
-    {MED_ACTIVECOOLING_LOWERLIMIT, MED_ACTIVECOOLING_UPPERLIMIT}
-  };
-
 void checkAndAlert(
   AlertTarget alertTarget, BatteryCharacter batteryChar, double temperatureInC);
 
