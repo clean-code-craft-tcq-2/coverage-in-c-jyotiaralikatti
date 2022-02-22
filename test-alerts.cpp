@@ -18,7 +18,6 @@ TEST_CASE("Test case to Infer breach when limit is NORMAL") {
 //** Test cases for checkAndAlert() **//
 TEST_CASE("Test case to alert TO_CONTROLLER for cooling type HI_ACTIVE_COOLING") {
     BatteryCharacter batteryChar;
-    batteryChar.brand = "xyz";
     batteryChar.coolingType = HI_ACTIVE_COOLING;
   
   REQUIRE(inferBreach(50, 0,45) == TOO_HIGH);// to cross verify
@@ -29,7 +28,6 @@ TEST_CASE("Test case to alert TO_CONTROLLER for cooling type HI_ACTIVE_COOLING")
 
 TEST_CASE("Test case to alert TO_CONTROLLER for cooling type MED_ACTIVE_COOLING") {
     BatteryCharacter batteryChar;
-    batteryChar.brand = "xyz";
     batteryChar.coolingType = MED_ACTIVE_COOLING;
   
   REQUIRE(inferBreach(-10, 0,40) == TOO_LOW);// to cross verify
@@ -41,7 +39,6 @@ TEST_CASE("Test case to alert TO_CONTROLLER for cooling type MED_ACTIVE_COOLING"
 
 TEST_CASE("Test case to alert TO_CONTROLLER for cooling type PASSIVE_COOLING") {
     BatteryCharacter batteryChar;
-    batteryChar.brand = "xyz";
     batteryChar.coolingType = PASSIVE_COOLING;
   
   REQUIRE(inferBreach(-10, 0,30) == TOO_LOW);// to cross verify
@@ -53,7 +50,6 @@ TEST_CASE("Test case to alert TO_CONTROLLER for cooling type PASSIVE_COOLING") {
 
 TEST_CASE("Test case to alert TO_EMAIL for cooling type HI_ACTIVE_COOLING") {
     BatteryCharacter batteryChar;
-    batteryChar.brand = "xyz";
     batteryChar.coolingType = HI_ACTIVE_COOLING;
   
   REQUIRE(inferBreach(50, 0,45) == TOO_HIGH);// to cross verify
@@ -64,7 +60,6 @@ TEST_CASE("Test case to alert TO_EMAIL for cooling type HI_ACTIVE_COOLING") {
 
 TEST_CASE("Test case to alert TO_EMAIL for cooling type MED_ACTIVE_COOLING") {
     BatteryCharacter batteryChar;
-    batteryChar.brand = "xyz";
     batteryChar.coolingType = MED_ACTIVE_COOLING;
   
   REQUIRE(inferBreach(-10, 0,40) == TOO_LOW);// to cross verify
@@ -76,7 +71,6 @@ TEST_CASE("Test case to alert TO_EMAIL for cooling type MED_ACTIVE_COOLING") {
 
 TEST_CASE("Test case to alert TO_EMAIL for cooling type PASSIVE_COOLING") {
     BatteryCharacter batteryChar;
-    batteryChar.brand = (const char)"xyz";
     batteryChar.coolingType = PASSIVE_COOLING;
   
   REQUIRE(inferBreach(-10, 0,30) == TOO_LOW);// to cross verify
