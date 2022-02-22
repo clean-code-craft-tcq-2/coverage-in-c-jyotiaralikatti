@@ -51,16 +51,3 @@ void sendToEmail(BreachType breachType) {
       printf("To: %s\n", recepient);
       printf("Hi, the temperature is %s\n",BreachTypeParameters[breachType]);
 }
-int main()
-{
-    BatteryCharacter batteryChar;
-    double temperatureInC = 100;
-    batteryChar.coolingType = HI_ACTIVE_COOLING;
-    printf("Send to controller case + HI_ACTIVE_COOLING\n");
-    checkAndAlert(TO_CONTROLLER,batteryChar,temperatureInC);
-    
-    printf("Send to email case\n ");
-    temperatureInC = 0;
-    checkAndAlert(TO_EMAIL,batteryChar,temperatureInC);
-    return 0;
-}
