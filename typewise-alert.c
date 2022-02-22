@@ -1,5 +1,7 @@
 #include "typewise-alert.h"
 #include <stdio.h>
+#include <assert.h>
+
 CoolingTypeLimitsConfig LimitsConfig[] = {/* LimitsConfig[coolingType] */
     /*lowerLimit                    upperLimit*/
     {PASSIVECOOLING_LOWERLIMIT,    PASSIVECOOLING_UPPERLIMIT },
@@ -10,11 +12,13 @@ const char* BreachTypeParameters[] = {"NORMAL","TOO_LOW","TOO_HIGH"};
 
 void (*alertTarget_FuncPtr[])(BreachType)={sendToController,sendToEmail};
 
-void checkAndAlert(AlertTarget alertTarget, BatteryCharacter batteryChar, double temperatureInC)
+BreachType  checkAndAlert(AlertTarget alertTarget, BatteryCharacter batteryChar, double temperatureInC)
 {
   BreachType breachType = classifyTemperatureBreach(batteryChar.coolingType, temperatureInC );
 
 alertTarget_FuncPtr[alertTarget](breachType);
+
+return breachType ;
 }
 
 BreachType classifyTemperatureBreach(CoolingType coolingType, double temperatureInC) {
