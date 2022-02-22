@@ -76,7 +76,7 @@ TEST_CASE("Test case to alert TO_EMAIL for cooling type MED_ACTIVE_COOLING") {
 
 TEST_CASE("Test case to alert TO_EMAIL for cooling type PASSIVE_COOLING") {
     BatteryCharacter batteryChar;
-    batteryChar.brand = "xyz";
+    batteryChar.brand = (const char)"xyz";
     batteryChar.coolingType = PASSIVE_COOLING;
   
   REQUIRE(inferBreach(-10, 0,30) == TOO_LOW);// to cross verify
