@@ -36,8 +36,9 @@ typedef struct {
   char brand[48];
 } BatteryCharacter;
 
-BreachType inferBreach(double temperatureInC, CoolingType coolingType );
+BreachType inferBreach(double temperatureInC, int ,int );
 CoolingTypeLimitsConfig GetLimitsOfCoolingType(CoolingType coolingType  );
+BreachType classifyTemperatureBreach(CoolingType coolingType, double temperatureInC);
 
 void checkAndAlert(
   AlertTarget alertTarget, BatteryCharacter batteryChar, double temperatureInC);
