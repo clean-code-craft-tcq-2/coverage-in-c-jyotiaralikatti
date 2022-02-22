@@ -12,17 +12,16 @@ void (*alertTarget_FuncPtr[])(BreachType)={sendToController,sendToEmail};
 
 void checkAndAlert(AlertTarget alertTarget, BatteryCharacter batteryChar, double temperatureInC)
 {
-  BreachType breachType = inferBreach( temperatureInC, batteryChar.coolingType );
+  BreachType breachType = classifyTemperatureBreach(batteryChar.coolingType, temperatureInC );
 
 alertTarget_FuncPtr[alertTarget](breachType);
 }
 
 BreachType classifyTemperatureBreach(CoolingType coolingType, double temperatureInC) {
-    CoolingTypeLimitsConfig LimitsConfigPtr;//
-    LimitsConfigPtr = GetLimitsOfCoolingType(coolingType);//
+    CoolingTypeLimitsConfig LimitsConfigPtr;
+    LimitsConfigPtr = GetLimitsOfCoolingType(coolingType);
 
-  printf("limits->lowerLimit :%d",LimitsConfigPtr.lowerLimit);//
-  return inferBreach(temperatureInC, coolingType);
+  return inferBreach(temperatureInC, LimitsConfigPtr.lowerLimit, LimitsConfigPtr.upperLimit);
 }
 
 CoolingTypeLimitsConfig GetLimitsOfCoolingType(CoolingType coolingType )
@@ -30,12 +29,12 @@ CoolingTypeLimitsConfig GetLimitsOfCoolingType(CoolingType coolingType )
     return LimitsConfig[coolingType];
 }
 
-BreachType inferBreach(double temperatureInC, CoolingType coolingType )
+BreachType inferBreach(double temperatureInC, int lowerLimit, int upperLimit )
 {
-  if(temperatureInC < LimitsConfig[coolingType].lowerLimit) {
+  if(temperatureInC < lowerLimit) {
     return TOO_LOW;
   }
-  if(temperatureInC > LimitsConfig[coolingType].upperLimit) {
+  if(temperatureInC > upperLimit) {
     return TOO_HIGH;
   }
   return NORMAL;
